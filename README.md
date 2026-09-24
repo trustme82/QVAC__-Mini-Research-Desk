@@ -52,7 +52,7 @@ QVAC SDK
 
 The QVAC SDK is used for local model loading and text generation.
 
-##License
+## License
 
 This project is licensed under the MIT License.
 
