@@ -32,15 +32,15 @@ QVAC Mini Research Desk is a small web application designed to demonstrate on-de
 git clone https://github.com/YOUR-USERNAME/QVAC-Mini-Research-Desk.git
 cd QVAC-Mini-Research-Desk
 ```
-## Install dependencies
+## 2. Install dependencies
 
 npm install
 
-## Start the application
+## 3. Start the application
 
 npm start
 
-## The application will be available at:
+## 4. The application will be available at:
 
 http://localhost:3000
 
@@ -50,7 +50,7 @@ QVAC SDK
 
 @qvac/sdk 0.19.0
 
-## The QVAC SDK is used for local model loading and text generation.
+The QVAC SDK is used for local model loading and text generation.
 
 ##License
 
