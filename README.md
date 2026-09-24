@@ -31,7 +31,7 @@ QVAC Mini Research Desk is a small web application designed to demonstrate on-de
 ```bash
 git clone https://github.com/YOUR-USERNAME/QVAC-Mini-Research-Desk.git
 cd QVAC-Mini-Research-Desk
-
+```
 ## Install dependencies
 
 npm install
