@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QVAC Mini Research Desk</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255,255,255,.7), transparent 35%),
+    linear-gradient(135deg, #fff1df 0%, #ffe7d0 48%, #ffdbc1 100%);
+  color: #4c3024;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 16px;
+}
+
+.wrap {
+  width: min(520px, 100%);
+  text-align: center;
+}
+
+.tiny-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 8px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: #fffaf5;
+  border: 1px solid rgba(119,72,44,.16);
+  box-shadow: 0 5px 14px rgba(119,72,44,.08);
+  font-size: 17px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(24px, 5vw, 31px);
+  font-weight: 800;
+  letter-spacing: -.8px;
+  color: #713d29;
+}
+
+.subtitle {
+  margin: 9px auto 20px;
+  max-width: 430px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #8b6250;
+}
+
+.desk {
+  background: rgba(255, 250, 244, .78);
+  border: 2px dashed #cda98f;
+  border-radius: 12px;
+  padding: 22px 20px 19px;
+  box-shadow: 0 12px 35px rgba(104, 58, 35, .10);
+  backdrop-filter: blur(4px);
+}
+
+.search-row {
+  display: flex;
+  gap: 9px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  height: 45px;
+  border: 2px solid #8f8178;
+  border-radius: 8px;
+  background: #fff;
+  color: #4b342a;
+  padding: 0 13px;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #df7944;
+  box-shadow: 0 0 0 3px rgba(223,121,68,.12);
+}
+
+button {
+  height: 45px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 17px;
+  background: #df7440;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(184,83,38,.18);
+  transition: transform .15s ease, filter .15s ease;
+}
+
+button:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.hint {
+  margin: 13px 0 0;
+  font-size: 11px;
+  color: #9b7562;
+}
+
+.result {
+  display: none;
+  margin-top: 18px;
+  padding: 17px;
+  border-radius: 9px;
+  background: #fffdf9;
+  border: 1px solid #e4c8b5;
+  text-align: left;
+}
+
+.result.show {
+  display: block;
+}
+
+.result-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .9px;
+  color: #b5653c;
+  margin-bottom: 7px;
+}
+
+.result h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #673b29;
+}
+
+.result p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #705548;
+}
+
+.facts {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: #705548;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.bar {
+  height: 4px;
+  margin-top: 15px;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    #df7440 0%,
+    #efad75 100%
+  );
+}
+
+.counter {
+  text-align: right;
+  margin-top: 6px;
+  font-size: 10px;
+  color: #a17d6c;
+}
+
+.footer {
+  margin-top: 16px;
+  font-size: 10px;
+  color: #a27d69;
+}
+
+.footer strong {
+  color: #8b604d;
+}
+
+@media (max-width: 480px) {
+  .search-row {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .desk {
+    padding: 18px 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+  <div class="tiny-icon">🔎</div>
+
+  <h1>QVAC Mini Research Desk</h1>
+
+  <p class="subtitle">
+    Ask a quick research question and get a compact,
+    easy-to-read research brief.
+  </p>
+
+  <section class="desk">
+
+    <div class="search-row">
+
+      <input
+        id="query"
+        maxlength="120"
+        placeholder="e.g. What is local AI?"
+        autocomplete="off"
+      >
+
+      <button id="researchBtn">
+        Research
+      </button>
+
+    </div>
+
+    <p class="hint">
+      Try a topic, question, person, place, product, or idea.
+    </p>
+
+    <div id="result" class="result">
+
+      <div class="result-label">
+        Mini Research Brief
+      </div>
+
+      <h2 id="resultTitle">
+        Your research topic
+      </h2>
+
+      <p id="resultText"></p>
+
+      <ul id="facts" class="facts"></ul>
+
+      <div class="bar"></div>
+
+      <div class="counter" id="counter">
+        0 / 120
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="footer">
+    Powered by <strong>QVAC Mini Research Desk</strong>
+    · local demo interface
+  </div>
+
+</main>
+
+<script>
+
+const input = document.getElementById("query");
+const btn = document.getElementById("researchBtn");
+const result = document.getElementById("result");
+const title = document.getElementById("resultTitle");
+const text = document.getElementById("resultText");
+const facts = document.getElementById("facts");
+const counter = document.getElementById("counter");
+
+const demoAnswers = {
+
+  "local ai": {
+    text:
+      "Local AI means running an AI model directly on a device instead of sending the inference request to a remote cloud service.",
+
+    facts: [
+      "Can work offline when the required model is already on the device.",
+      "Can keep prompts and files on the user's hardware.",
+      "Performance depends on the device and model being used."
+    ]
+  },
+
+  "qvac": {
+    text:
+      "QVAC is a local AI SDK designed for building AI applications that can run models on users' own hardware.",
+
+    facts: [
+      "Supports JavaScript/TypeScript and Python clients.",
+      "Can support capabilities such as text generation, vision, embeddings, RAG and OCR.",
+      "Models can be loaded locally depending on the QVAC setup."
+    ]
+  }
+
+};
+
+function updateCounter() {
+  counter.textContent =
+    `${input.value.length} / 120`;
+}
+
+input.addEventListener("input", updateCounter);
+
+function research() {
+
+  const q = input.value.trim();
+
+  if (!q) {
+    input.focus();
+    return;
+  }
+
+  const key = q.toLowerCase();
+
+  const answer = demoAnswers[key];
+
+  title.textContent = q;
+
+  if (answer) {
+
+    text.textContent = answer.text;
+
+    facts.innerHTML =
+      answer.facts
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+  } else {
+
+    text.textContent =
+      `This is a local demo research card for “${q}”. Connect the interface to a QVAC model to generate a full on-device research response.`;
+
+    facts.innerHTML = `
+      <li>Topic received successfully.</li>
+      <li>Research output can be generated locally with a compatible model.</li>
+      <li>Add your QVAC inference function where the demo response is created.</li>
+    `;
+  }
+
+  result.classList.add("show");
+}
+
+btn.addEventListener("click", research);
+
+input.addEventListener("keydown", function(e) {
+
+  if (e.key === "Enter") {
+    research();
+  }
+
+});
+
+updateCounter();
+
+</script>
+
+</body>
+</html>
